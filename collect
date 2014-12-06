@@ -23,18 +23,19 @@ File.open(dnsmasq_file, 'w') do |file|
 end
 
 # update domain ip list
+keyword = ': forwarded'
 domain_list = JSON.parse File.read(domains_file)
 log_rows.each_line do |line|
   line.strip!
-  next unless line.include? ': reply'
+  next unless line.include? keyword
   sites.each do |site|
-    if line.include? "#{site} is"
-      index = line.index(' is ') + 4
+    if line.include? "#{site} "
+      index = line.index(' to ') + 4
       reply = line[index..-1]
       if reply =~ /\d+\.\d+\.\d+\./
-        domain_start = line.index(': reply ') + 8
+        domain_start = line.index(keyword) + keyword.length
         domain_end   = reply.length + 5
-        domain_name  = line[domain_start..-domain_end]
+        domain_name  = line[domain_start..-domain_end].strip!
         unless domain_list.has_key? domain_name
           domain_list[domain_name] = Resolv.getaddresses domain_name
         end
