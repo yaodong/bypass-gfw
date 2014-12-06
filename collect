@@ -8,9 +8,11 @@ host_file     = 'dist/hosts.conf'
 rules_file    = 'dist/router.rules'
 domains_file  = 'dist/domains.json'
 dnsmasq_file  = 'dist/dnsmasq.conf'
+open_dns_ip   = '208.67.222.222'
+open_dns_port = '443'
 
 log_rows = File.read log_file
-File.truncate log_file, 0
+# File.truncate log_file, 0
 sites = File.read('conf/sites.conf')
             .split("\n")
             .select { |site| !(site.include? '#' or site.empty? ) }
@@ -18,11 +20,12 @@ sites = File.read('conf/sites.conf')
 # update dnsmasq resolv file
 File.open(dnsmasq_file, 'w') do |file|
   sites.each do |site|
-    file.write "server=/#{site}/208.67.222.222#443\n"
+    file.write "server=/#{site}/#{open_dns_ip}##{open_dns_port}\n"
   end
 end
 
 # update domain ip list
+dns_server = Resolv::DNS.new(:nameserver_port => [open_dns_ip, open_dns_port])
 keyword = ': forwarded'
 domain_list = JSON.parse File.read(domains_file)
 log_rows.each_line do |line|
@@ -36,9 +39,10 @@ log_rows.each_line do |line|
         domain_start = line.index(keyword) + keyword.length
         domain_end   = reply.length + 5
         domain_name  = line[domain_start..-domain_end].strip!
-        # unless domain_list.has_key? domain_name
-          domain_list[domain_name] = Resolv.getaddresses domain_name
-        # end
+        domain_list[domain_name] = []
+        dns_server.each_address(domain_name) do |ip|
+          domain_list[domain_name].push ip.to_s
+        end
       end
       break
     end
@@ -61,6 +65,7 @@ end
 # update dnsmasq file
 File.open(rules_file, 'w') do |file|
   domain_list.each do |d|
+    p d[1]
     d[1].each do |ip|
       next unless ip =~ /\d+\.\d+\.\d+\./
       file.write "/ip route remove [/ip route find dst-address=#{ip}/32]\n"
