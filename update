@@ -57,25 +57,27 @@ File.open(domains_file, 'w') do |file|
 end
 
 # update DNS result
+dns_server = Resolv::DNS.new(:nameserver_port => [open_dns_ip, open_dns_port])
 hosts = {}
 domains.each do |domain|
   p "resolving #{domain}"
-  Resolv.each_address(domain) do |ip|
-    hosts[ip] = domain
-  end
+  hosts[domain] = dns_server.getaddress domain
 end
 
 # update host file
 File.open(host_file, 'w') do |file|
   hosts.each do |h|
-    file.write "#{h[0]} #{h[1]}\n"
+    file.write "#{h[1]} #{h[0]}\n"
   end
 end
 
 # update dnsmasq file
 File.open(rules_file, 'w') do |file|
   hosts.each do |h|
-    file.write "/ip route remove [/ip route find dst-address=#{h[0]}/32]\n"
-    file.write "/ip route add dst-address=#{h[0]}/32 gateway=pptp-out1 comment=\"gfw\"\n"
+    file.write "/ip route remove [/ip route find dst-address=#{h[1]}/32]\n"
+    file.write "/ip route add dst-address=#{h[1]}/32 gateway=pptp-out1 comment=gfw\n"
+    file.write "/ip dns static remove [/ip dns static find name=#{h[0]}]\n"
+    file.write "/ip dns static add name=#{h[0]} address=#{h[1]} comment=gfw\n"
+    file.write "\n"
   end
 end
