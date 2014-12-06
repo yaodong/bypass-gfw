@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+
+require 'resolv'
+require 'json'
+
+log_file      = '/var/log/dnsmasq.log'
+host_file     = 'dist/hosts.conf'
+rules_file    = 'dist/router.rules'
+domains_file  = 'dist/domains.json'
+dnsmasq_file  = 'dist/dnsmasq.conf'
+
+log_rows = File.read log_file
+File.truncate log_file, 0
+sites = File.read('conf/sites.conf')
+            .split("\n")
+            .select { |site| !(site.include? '#' or site.empty? ) }
+
+# update dnsmasq resolv file
+File.open(dnsmasq_file, 'w') do |file|
+  sites.each do |site|
+    file.write "server=/#{site}/208.67.222.222#443\n"
+  end
+end
+
+# update domain ip list
+domain_list = JSON.parse File.read(domains_file)
+log_rows.each_line do |line|
+  line.strip!
+  next unless line.include? ': reply'
+  sites.each do |site|
+    if line.include? "#{site} is"
+      index = line.index(' is ') + 4
+      reply = line[index..-1]
+      if reply =~ /\d+\.\d+\.\d+\./
+        domain_start = line.index(': reply ') + 8
+        domain_end   = reply.length + 5
+        domain_name  = line[domain_start..-domain_end]
+        unless domain_list.has_key? domain_name
+          domain_list[domain_name] = Resolv.getaddresses domain_name
+        end
+      end
+      break
+    end
+  end
+end
+
+File.open(domains_file, 'w') do |f|
+  f.write JSON.pretty_generate(domain_list)
+end
+
+# update host file
+File.open(host_file, 'w') do |file|
+  domain_list.each do |d|
+    d[1].each do |ip|
+      file.write "#{ip} #{d[0]}\n"
+    end
+  end
+end
+
+# update dnsmasq file
+File.open(rules_file, 'w') do |file|
+  domain_list.each do |d|
+    d[1].each do |ip|
+      next unless ip =~ /\d+\.\d+\.\d+\./
+      file.write "/ip route remove [/ip route find dst-address=#{ip}/32]\n"
+      file.write "/ip route add dst-address=#{ip}/32 gateway=pptp-out1 comment=\"gfw\"\n"
+    end
+  end
+end
