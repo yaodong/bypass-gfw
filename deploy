@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
-cp -f dist/dnsmasq.conf /etc/dnsmasq.d/
-cp -f dist/hosts.conf /etc/
-
+cp -f dist/dnsmasq/* /etc/dnsmasq.d/
 /etc/init.d/dnsmasq force-reload
 
 sftp admin@192.168.88.1 <<EOF

@@ -5,10 +5,10 @@ require 'json'
 
 log_file      = 'dnsmasq.log'
 sites_file    = 'conf/sites.conf'
-host_file     = 'dist/hosts.conf'
+hosts_file    = 'dist/dnsmasq/address.conf'
+dnsmasq_file  = 'dist/dnsmasq/server.conf'
+domains_file  = 'dist/domains.list'
 rules_file    = 'dist/router.rules'
-domains_file  = 'dist/domains.conf'
-dnsmasq_file  = 'dist/dnsmasq.conf'
 open_dns_ip   = '208.67.222.222'
 open_dns_port = 443
 
@@ -16,7 +16,6 @@ open_dns_port = 443
 system 'scp pi@192.168.88.242:/var/log/dnsmasq.log .'
 
 log_rows = File.read log_file
-# File.truncate log_file, 0
 sites = File.read(sites_file)
             .split("\n")
             .select { |site| !(site.include? '#' or site.empty? ) }
@@ -73,9 +72,10 @@ domains.each do |domain|
 end
 
 # update host file
-File.open(host_file, 'w') do |file|
+File.open(hosts_file, 'w') do |file|
   hosts.each do |h|
-    file.write "#{h[1].ljust(20)} #{h[0]}\n"
+    p h
+    file.write "address=/#{h[0]}/#{h[1]}\n"
   end
 end
 
