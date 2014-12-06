@@ -57,12 +57,11 @@ File.open(domains_file, 'w') do |file|
 end
 
 # update DNS result
-dns_server = Resolv::DNS.new(:nameserver_port => [open_dns_ip, open_dns_port])
 hosts = {}
 domains.each do |domain|
   p "resolving #{domain}"
-  dns_server.each_address(domain) do |ip|
-    hosts[ip.to_s] = domain
+  Resolv.each_address(domain) do |ip|
+    hosts[ip] = domain
   end
 end
 
