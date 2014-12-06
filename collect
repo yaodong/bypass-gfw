@@ -36,9 +36,9 @@ log_rows.each_line do |line|
         domain_start = line.index(keyword) + keyword.length
         domain_end   = reply.length + 5
         domain_name  = line[domain_start..-domain_end].strip!
-        unless domain_list.has_key? domain_name
+        # unless domain_list.has_key? domain_name
           domain_list[domain_name] = Resolv.getaddresses domain_name
-        end
+        # end
       end
       break
     end
