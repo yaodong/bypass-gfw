@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-cp dist/dnsmasq.conf /etc/dnsmasq.d/
-cp dist/hosts.conf /etc/
+cp -f dist/dnsmasq.conf /etc/dnsmasq.d/
+cp -f dist/hosts.conf /etc/
 
 /etc/init.d/dnsmasq force-reload
 

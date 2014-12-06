@@ -1,23 +1,41 @@
 /ip route remove [/ip route find dst-address=199.27.79.130/32]
 /ip route add dst-address=199.27.79.130/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=93.46.8.89/32]
-/ip route add dst-address=93.46.8.89/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=42.99.254.160/32]
-/ip route add dst-address=42.99.254.160/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.79/32]
+/ip route add dst-address=23.60.69.79/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.161/32]
+/ip route add dst-address=23.60.69.161/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.174/32]
+/ip route add dst-address=23.60.69.174/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.94/32]
+/ip route add dst-address=23.60.69.94/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.81/32]
+/ip route add dst-address=23.60.69.81/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.111/32]
+/ip route add dst-address=23.60.69.111/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.169/32]
+/ip route add dst-address=23.60.69.169/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:FD4/32]
+/ip route add dst-address=2600:1417:9::B833:FD4/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:FC4/32]
+/ip route add dst-address=2600:1417:9::B833:FC4/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:FCE/32]
+/ip route add dst-address=2600:1417:9::B833:FCE/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=72.246.103.18/32]
+/ip route add dst-address=72.246.103.18/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=72.246.103.9/32]
+/ip route add dst-address=72.246.103.9/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=42.99.254.137/32]
 /ip route add dst-address=42.99.254.137/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=2600:140E:6::1702:103B/32]
-/ip route add dst-address=2600:140E:6::1702:103B/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=42.99.254.160/32]
+/ip route add dst-address=42.99.254.160/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2600:140E:6::1702:1033/32]
 /ip route add dst-address=2600:140E:6::1702:1033/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=23.60.69.73/32]
-/ip route add dst-address=23.60.69.73/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:140E:6::1702:103B/32]
+/ip route add dst-address=2600:140E:6::1702:103B/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=23.60.69.104/32]
 /ip route add dst-address=23.60.69.104/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=23.60.69.89/32]
 /ip route add dst-address=23.60.69.89/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=23.60.69.81/32]
-/ip route add dst-address=23.60.69.81/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=23.60.69.97/32]
 /ip route add dst-address=23.60.69.97/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=23.60.69.175/32]
@@ -28,12 +46,64 @@
 /ip route add dst-address=23.60.69.87/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=23.60.69.88/32]
 /ip route add dst-address=23.60.69.88/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=2600:140B:2:4::7D38:DA3E/32]
-/ip route add dst-address=2600:140B:2:4::7D38:DA3E/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.73/32]
+/ip route add dst-address=23.60.69.73/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2600:140B:2:4::7D38:C979/32]
 /ip route add dst-address=2600:140B:2:4::7D38:C979/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2600:140B:2:4::7D38:DA13/32]
 /ip route add dst-address=2600:140B:2:4::7D38:DA13/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:140B:2:4::7D38:DA3E/32]
+/ip route add dst-address=2600:140B:2:4::7D38:DA3E/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.145/32]
+/ip route add dst-address=23.60.69.145/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.119/32]
+/ip route add dst-address=23.60.69.119/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.136/32]
+/ip route add dst-address=23.60.69.136/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.95/32]
+/ip route add dst-address=23.60.69.95/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.105/32]
+/ip route add dst-address=23.60.69.105/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.120/32]
+/ip route add dst-address=23.60.69.120/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.60.69.78/32]
+/ip route add dst-address=23.60.69.78/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:FC5/32]
+/ip route add dst-address=2600:1417:9::B833:FC5/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:F8D/32]
+/ip route add dst-address=2600:1417:9::B833:F8D/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:FDD/32]
+/ip route add dst-address=2600:1417:9::B833:FDD/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=184.50.87.96/32]
+/ip route add dst-address=184.50.87.96/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=184.50.87.120/32]
+/ip route add dst-address=184.50.87.120/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=184.50.87.185/32]
+/ip route add dst-address=184.50.87.185/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=42.99.254.152/32]
+/ip route add dst-address=42.99.254.152/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=42.99.254.155/32]
+/ip route add dst-address=42.99.254.155/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:140E:6::1702:1040/32]
+/ip route add dst-address=2600:140E:6::1702:1040/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:140E:6::1702:1041/32]
+/ip route add dst-address=2600:140E:6::1702:1041/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=184.50.87.122/32]
+/ip route add dst-address=184.50.87.122/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=184.50.87.112/32]
+/ip route add dst-address=184.50.87.112/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:FBC/32]
+/ip route add dst-address=2600:1417:9::B833:FBC/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:FCC/32]
+/ip route add dst-address=2600:1417:9::B833:FCC/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=184.50.87.99/32]
+/ip route add dst-address=184.50.87.99/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:FB6/32]
+/ip route add dst-address=2600:1417:9::B833:FB6/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=184.50.87.187/32]
+/ip route add dst-address=184.50.87.187/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2600:1417:9::B833:FB7/32]
+/ip route add dst-address=2600:1417:9::B833:FB7/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=184.50.87.97/32]
 /ip route add dst-address=184.50.87.97/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=184.50.87.107/32]
@@ -42,12 +112,8 @@
 /ip route add dst-address=184.50.87.88/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=184.50.87.106/32]
 /ip route add dst-address=184.50.87.106/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=184.50.87.120/32]
-/ip route add dst-address=184.50.87.120/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=184.50.87.144/32]
 /ip route add dst-address=184.50.87.144/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=184.50.87.99/32]
-/ip route add dst-address=184.50.87.99/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=184.50.87.104/32]
 /ip route add dst-address=184.50.87.104/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=184.50.87.146/32]
@@ -58,8 +124,10 @@
 /ip route add dst-address=2600:1417:9::B833:F4E/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2600:1417:9::B833:F4C/32]
 /ip route add dst-address=2600:1417:9::B833:F4C/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=184.50.87.122/32]
-/ip route add dst-address=184.50.87.122/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.2.16.97/32]
+/ip route add dst-address=23.2.16.97/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.2.16.90/32]
+/ip route add dst-address=23.2.16.90/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=184.50.87.188/32]
 /ip route add dst-address=184.50.87.188/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2600:1417:9::6007:3719/32]
@@ -80,12 +148,20 @@
 /ip route add dst-address=173.194.72.93/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4008:C01::88/32]
 /ip route add dst-address=2404:6800:4008:C01::88/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=199.59.148.20/32]
+/ip route add dst-address=199.59.148.20/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=199.59.150.41/32]
+/ip route add dst-address=199.59.150.41/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=199.59.149.232/32]
+/ip route add dst-address=199.59.149.232/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=199.59.148.87/32]
+/ip route add dst-address=199.59.148.87/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.72.141/32]
 /ip route add dst-address=173.194.72.141/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4008:C00::8D/32]
 /ip route add dst-address=2404:6800:4008:C00::8D/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=59.24.3.173/32]
-/ip route add dst-address=59.24.3.173/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=108.160.166.140/32]
+/ip route add dst-address=108.160.166.140/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=74.125.235.227/32]
 /ip route add dst-address=74.125.235.227/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=74.125.235.225/32]
@@ -114,6 +190,8 @@
 /ip route add dst-address=46.82.174.68/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=159.106.121.75/32]
 /ip route add dst-address=159.106.121.75/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2606:2800:20D:1047:6CF:353:607:E8A/32]
+/ip route add dst-address=2606:2800:20D:1047:6CF:353:607:E8A/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=203.208.48.151/32]
 /ip route add dst-address=203.208.48.151/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=203.208.48.152/32]
@@ -126,6 +204,34 @@
 /ip route add dst-address=2404:6800:4008:C03::5E/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=199.27.79.134/32]
 /ip route add dst-address=199.27.79.134/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=199.27.79.184/32]
+/ip route add dst-address=199.27.79.184/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=23.235.47.184/32]
+/ip route add dst-address=23.235.47.184/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.99/32]
+/ip route add dst-address=173.194.127.99/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.97/32]
+/ip route add dst-address=173.194.127.97/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.105/32]
+/ip route add dst-address=173.194.127.105/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.110/32]
+/ip route add dst-address=173.194.127.110/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.101/32]
+/ip route add dst-address=173.194.127.101/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.103/32]
+/ip route add dst-address=173.194.127.103/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.100/32]
+/ip route add dst-address=173.194.127.100/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.102/32]
+/ip route add dst-address=173.194.127.102/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.104/32]
+/ip route add dst-address=173.194.127.104/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.96/32]
+/ip route add dst-address=173.194.127.96/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.98/32]
+/ip route add dst-address=173.194.127.98/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2404:6800:4005:807::1001/32]
+/ip route add dst-address=2404:6800:4005:807::1001/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=199.27.79.133/32]
 /ip route add dst-address=199.27.79.133/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.127.201/32]
@@ -152,6 +258,28 @@
 /ip route add dst-address=173.194.127.196/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:801::1000/32]
 /ip route add dst-address=2404:6800:4005:801::1000/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=74.125.203.95/32]
+/ip route add dst-address=74.125.203.95/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2404:6800:4008:C00::5F/32]
+/ip route add dst-address=2404:6800:4008:C00::5F/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.139/32]
+/ip route add dst-address=173.194.127.139/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.140/32]
+/ip route add dst-address=173.194.127.140/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.138/32]
+/ip route add dst-address=173.194.127.138/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2404:6800:4005:805::100A/32]
+/ip route add dst-address=2404:6800:4005:805::100A/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.215/32]
+/ip route add dst-address=173.194.127.215/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.216/32]
+/ip route add dst-address=173.194.127.216/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.223/32]
+/ip route add dst-address=173.194.127.223/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.207/32]
+/ip route add dst-address=173.194.127.207/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2404:6800:4005:804::1017/32]
+/ip route add dst-address=2404:6800:4005:804::1017/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.118.15/32]
 /ip route add dst-address=173.194.118.15/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.118.23/32]
@@ -172,6 +300,20 @@
 /ip route add dst-address=173.194.72.18/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:802::1015/32]
 /ip route add dst-address=2404:6800:4005:802::1015/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=69.171.235.48/32]
+/ip route add dst-address=69.171.235.48/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2A03:2880:2110:6F06:FACE:B00C::1/32]
+/ip route add dst-address=2A03:2880:2110:6F06:FACE:B00C::1/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=108.160.162.105/32]
+/ip route add dst-address=108.160.162.105/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=108.160.163.110/32]
+/ip route add dst-address=108.160.163.110/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=108.160.162.103/32]
+/ip route add dst-address=108.160.162.103/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=108.160.167.159/32]
+/ip route add dst-address=108.160.167.159/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=108.160.163.107/32]
+/ip route add dst-address=108.160.163.107/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.127.172/32]
 /ip route add dst-address=173.194.127.172/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.127.170/32]
@@ -180,6 +322,8 @@
 /ip route add dst-address=173.194.127.171/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:805::100C/32]
 /ip route add dst-address=2404:6800:4005:805::100C/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=199.96.57.6/32]
+/ip route add dst-address=199.96.57.6/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.72.100/32]
 /ip route add dst-address=173.194.72.100/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.72.138/32]
@@ -218,30 +362,12 @@
 /ip route add dst-address=203.208.46.163/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:807::100E/32]
 /ip route add dst-address=2404:6800:4005:807::100E/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.105/32]
-/ip route add dst-address=173.194.127.105/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.99/32]
-/ip route add dst-address=173.194.127.99/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.103/32]
-/ip route add dst-address=173.194.127.103/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.104/32]
-/ip route add dst-address=173.194.127.104/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.97/32]
-/ip route add dst-address=173.194.127.97/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.101/32]
-/ip route add dst-address=173.194.127.101/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.98/32]
-/ip route add dst-address=173.194.127.98/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.110/32]
-/ip route add dst-address=173.194.127.110/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.96/32]
-/ip route add dst-address=173.194.127.96/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.100/32]
-/ip route add dst-address=173.194.127.100/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.102/32]
-/ip route add dst-address=173.194.127.102/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:807::1006/32]
 /ip route add dst-address=2404:6800:4005:807::1006/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=31.13.93.7/32]
+/ip route add dst-address=31.13.93.7/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2A03:2880:F01C:6:FACE:B00C::1/32]
+/ip route add dst-address=2A03:2880:F01C:6:FACE:B00C::1/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=31.13.82.23/32]
 /ip route add dst-address=31.13.82.23/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2A03:2880:F00F:108:FACE:B00C::1/32]
@@ -250,8 +376,18 @@
 /ip route add dst-address=203.208.48.158/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:805::101E/32]
 /ip route add dst-address=2404:6800:4005:805::101E/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=37.61.54.158/32]
-/ip route add dst-address=37.61.54.158/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.127/32]
+/ip route add dst-address=173.194.127.127/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.111/32]
+/ip route add dst-address=173.194.127.111/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.120/32]
+/ip route add dst-address=173.194.127.120/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.119/32]
+/ip route add dst-address=173.194.127.119/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=31.13.70.1/32]
+/ip route add dst-address=31.13.70.1/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2A03:2880:F00D:501:FACE:B00C::1/32]
+/ip route add dst-address=2A03:2880:F00D:501:FACE:B00C::1/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=74.125.136.138/32]
 /ip route add dst-address=74.125.136.138/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=74.125.136.102/32]
@@ -266,6 +402,12 @@
 /ip route add dst-address=74.125.136.139/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:805::1009/32]
 /ip route add dst-address=2404:6800:4005:805::1009/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=59.24.3.173/32]
+/ip route add dst-address=59.24.3.173/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=199.59.148.139/32]
+/ip route add dst-address=199.59.148.139/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=93.46.8.89/32]
+/ip route add dst-address=93.46.8.89/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=199.96.57.7/32]
 /ip route add dst-address=199.96.57.7/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=203.208.48.131/32]
@@ -292,6 +434,8 @@
 /ip route add dst-address=203.208.48.133/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:801::1009/32]
 /ip route add dst-address=2404:6800:4005:801::1009/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=173.194.127.49/32]
+/ip route add dst-address=173.194.127.49/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.127.52/32]
 /ip route add dst-address=173.194.127.52/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.127.50/32]
@@ -300,20 +444,14 @@
 /ip route add dst-address=173.194.127.51/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.127.48/32]
 /ip route add dst-address=173.194.127.48/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.49/32]
-/ip route add dst-address=173.194.127.49/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:806::1013/32]
 /ip route add dst-address=2404:6800:4005:806::1013/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.215/32]
-/ip route add dst-address=173.194.127.215/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.207/32]
-/ip route add dst-address=173.194.127.207/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.223/32]
-/ip route add dst-address=173.194.127.223/32 gateway=pptp-out1 comment="gfw"
-/ip route remove [/ip route find dst-address=173.194.127.216/32]
-/ip route add dst-address=173.194.127.216/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:807::101F/32]
 /ip route add dst-address=2404:6800:4005:807::101F/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=37.61.54.158/32]
+/ip route add dst-address=37.61.54.158/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2404:6800:4005:807::1003/32]
+/ip route add dst-address=2404:6800:4005:807::1003/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.127.232/32]
 /ip route add dst-address=173.194.127.232/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=173.194.127.226/32]
@@ -362,3 +500,7 @@
 /ip route add dst-address=173.194.127.32/32 gateway=pptp-out1 comment="gfw"
 /ip route remove [/ip route find dst-address=2404:6800:4005:803::1008/32]
 /ip route add dst-address=2404:6800:4005:803::1008/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=31.13.70.6/32]
+/ip route add dst-address=31.13.70.6/32 gateway=pptp-out1 comment="gfw"
+/ip route remove [/ip route find dst-address=2A03:2880:F00D:406:FACE:B00C::1/32]
+/ip route add dst-address=2A03:2880:F00D:406:FACE:B00C::1/32 gateway=pptp-out1 comment="gfw"
