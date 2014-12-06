@@ -10,7 +10,7 @@ rules_file    = 'dist/router.rules'
 domains_file  = 'dist/domains.conf'
 dnsmasq_file  = 'dist/dnsmasq.conf'
 open_dns_ip   = '208.67.222.222'
-open_dns_port = '443'
+open_dns_port = 443
 
 # download dnsmasq log
 system 'scp pi@192.168.88.242:/var/log/dnsmasq.log .'
@@ -29,14 +29,14 @@ File.open(dnsmasq_file, 'w') do |file|
 end
 
 # update domain ip list
-keyword = ': reply'
+keyword = ': forwarded'
 domains = File.read(domains_file).split("\n")
 log_rows.each_line do |line|
   line.strip!
   next unless line.include? keyword
   sites.each do |site|
     if line.include? "#{site} "
-      index = line.index(' is ') + 4
+      index = line.index(' to ') + 4
       reply = line[index..-1]
       if reply =~ /\d+\.\d+\.\d+\./
         domain_start = line.index(keyword) + keyword.length
@@ -49,7 +49,11 @@ log_rows.each_line do |line|
   end
 end
 
-domains.uniq!.sort!
+domains.uniq!.sort_by! do |a, b|
+  a = a.split('.')[-2] unless a.nil?
+  b = b.split('.')[-2] unless b.nil?
+  a <=> b
+end
 
 # update domains file
 File.open(domains_file, 'w') do |file|
@@ -57,17 +61,21 @@ File.open(domains_file, 'w') do |file|
 end
 
 # update DNS result
-dns_server = Resolv::DNS.new(:nameserver_port => [open_dns_ip, open_dns_port])
+dns_server = Resolv::DNS.new nameserver_port: [[open_dns_ip, open_dns_port]]
 hosts = {}
 domains.each do |domain|
   p "resolving #{domain}"
-  hosts[domain] = dns_server.getaddress domain
+  begin
+    hosts[domain] = dns_server.getaddress(domain).to_s
+  rescue => detail
+    p "resolving #{domain} fail: #{detail}"
+  end
 end
 
 # update host file
 File.open(host_file, 'w') do |file|
   hosts.each do |h|
-    file.write "#{h[1]} #{h[0]}\n"
+    file.write "#{h[1].ljust(20)} #{h[0]}\n"
   end
 end
 
@@ -76,8 +84,5 @@ File.open(rules_file, 'w') do |file|
   hosts.each do |h|
     file.write "/ip route remove [/ip route find dst-address=#{h[1]}/32]\n"
     file.write "/ip route add dst-address=#{h[1]}/32 gateway=pptp-out1 comment=gfw\n"
-    file.write "/ip dns static remove [/ip dns static find name=#{h[0]}]\n"
-    file.write "/ip dns static add name=#{h[0]} address=#{h[1]} comment=gfw\n"
-    file.write "\n"
   end
 end
