@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+sftp admin@192.168.88.1 <<EOF
+put dist/router.rules
+EOF
+
+ssh admin@192.168.88.1 "/import router.rules"
