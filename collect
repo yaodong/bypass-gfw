@@ -6,7 +6,7 @@ require 'json'
 log_file      = '/var/log/dnsmasq.log'
 host_file     = 'dist/hosts.conf'
 rules_file    = 'dist/router.rules'
-domains_file  = 'dist/domains.json'
+domains_file  = 'dist/domains.conf'
 dnsmasq_file  = 'dist/dnsmasq.conf'
 open_dns_ip   = '208.67.222.222'
 open_dns_port = '443'
@@ -25,9 +25,8 @@ File.open(dnsmasq_file, 'w') do |file|
 end
 
 # update domain ip list
-dns_server = Resolv::DNS.new(:nameserver_port => [open_dns_ip, open_dns_port])
 keyword = ': forwarded'
-domain_list = JSON.parse File.read(domains_file)
+domains = File.read(domains_file).split("\n")
 log_rows.each_line do |line|
   line.strip!
   next unless line.include? keyword
@@ -39,37 +38,36 @@ log_rows.each_line do |line|
         domain_start = line.index(keyword) + keyword.length
         domain_end   = reply.length + 5
         domain_name  = line[domain_start..-domain_end].strip!
-        domain_list[domain_name] = []
-        dns_server.each_address(domain_name) do |ip|
-          domain_list[domain_name].push ip.to_s
-        end
+        domains.push domain_name
       end
       break
     end
   end
 end
 
-File.open(domains_file, 'w') do |f|
-  f.write JSON.pretty_generate(domain_list)
+domains.uniq!
+
+# update DNS result
+dns_server = Resolv::DNS.new(:nameserver_port => [open_dns_ip, open_dns_port])
+hosts = {}
+domains.each do |domain|
+  p "resolving #{domain}"
+  dns_server.each_address(domain) do |ip|
+    hosts[ip.to_s] = domain
+  end
 end
 
 # update host file
 File.open(host_file, 'w') do |file|
-  domain_list.each do |d|
-    d[1].each do |ip|
-      file.write "#{ip} #{d[0]}\n"
-    end
+  hosts.each do |h|
+    file.write "#{h[0]} #{h[1]}\n"
   end
 end
 
 # update dnsmasq file
 File.open(rules_file, 'w') do |file|
-  domain_list.each do |d|
-    p d[1]
-    d[1].each do |ip|
-      next unless ip =~ /\d+\.\d+\.\d+\./
-      file.write "/ip route remove [/ip route find dst-address=#{ip}/32]\n"
-      file.write "/ip route add dst-address=#{ip}/32 gateway=pptp-out1 comment=\"gfw\"\n"
-    end
+  hosts.each do |h|
+    file.write "/ip route remove [/ip route find dst-address=#{h[0]}/32]\n"
+    file.write "/ip route add dst-address=#{h[0]}/32 gateway=pptp-out1 comment=\"gfw\"\n"
   end
 end
