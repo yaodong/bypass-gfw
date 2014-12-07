@@ -74,7 +74,6 @@ end
 # update host file
 File.open(hosts_file, 'w') do |file|
   hosts.each do |h|
-    p h
     file.write "address=/#{h[0]}/#{h[1]}\n"
   end
 end
