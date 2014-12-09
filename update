@@ -13,7 +13,7 @@ open_dns_ip   = '208.67.222.222'
 open_dns_port = 443
 
 # download dnsmasq log
-system 'scp pi@192.168.88.242:/var/log/dnsmasq.log .'
+system 'scp pi@192.168.88.53:/var/log/dnsmasq.log .'
 
 log_rows = File.read log_file
 sites = File.read(sites_file)
