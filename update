@@ -3,17 +3,18 @@
 require 'resolv'
 require 'json'
 
-log_file      = 'dnsmasq.log'
-sites_file    = 'conf/sites.conf'
-hosts_file    = 'dist/dnsmasq.d/address.conf'
-dnsmasq_file  = 'dist/dnsmasq.d/server.conf'
-domains_file  = 'dist/domains.list'
-rules_file    = 'dist/router.rules'
+root_path     = File.dirname(__FILE__)
+log_file      = '/tmp/dnsmasq.log'
+sites_file    = root_path + '/conf/sites.conf'
+hosts_file    = root_path + '/dist/dnsmasq.d/address.conf'
+dnsmasq_file  = root_path + '/dist/dnsmasq.d/server.conf'
+domains_file  = root_path + '/dist/domains.list'
+rules_file    = root_path + '/dist/router.rules'
 open_dns_ip   = '208.67.222.222'
 open_dns_port = 443
 
 # download dnsmasq log
-system 'scp pi@192.168.88.53:/var/log/dnsmasq.log .'
+system "scp pi@192.168.88.53:/var/log/dnsmasq.log #{log_file}"
 
 log_rows = File.read log_file
 sites = File.read(sites_file)
