@@ -1,4 +1,5 @@
 require 'resolv'
+require 'netaddr'
 
 data_path = "#{__dir__}/data"
 domains_file = "#{data_path}/domains.list"
@@ -12,11 +13,11 @@ domains.each do |d|
   begin
     p "resolving #{d}"
     ip = dns_server.getaddress(d).to_s
+    ip_ranges.push "#{ip}/32"
+    hosts[d] = ip
   rescue => detail
     p "resolving #{d} fail: #{detail}"
   end
-  ip_ranges.push "#{ip}/32"
-  hosts[d] = ip
 end
 
 File.open("#{data_path}/dnsmasq/address.conf", 'w') do |f|
@@ -24,6 +25,14 @@ File.open("#{data_path}/dnsmasq/address.conf", 'w') do |f|
     f.write "address=/#{h[0]}/#{h[1]}\n"
   end
 end
+
+loop do
+  length = ip_ranges.length
+  ip_ranges = NetAddr.merge ip_ranges
+  break if length == ip_ranges.length
+end
+
+ip_ranges.sort!
 
 File.open("#{data_path}/router.rules", 'w') do |f|
   ip_ranges.each do |i|
