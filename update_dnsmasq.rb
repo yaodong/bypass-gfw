@@ -12,11 +12,20 @@ dns_server = Resolv::DNS.new nameserver_port: [['208.67.222.222', 443]]
 domains.each do |d|
   begin
     p "resolving #{d}"
-    ip = dns_server.getaddress(d).to_s
-    ip_ranges.push "#{ip}/32"
-    hosts[d] = ip
+    hosts[d] = dns_server.getaddress(d).to_s
   rescue => detail
     p "resolving #{d} fail: #{detail}"
+  end
+end
+
+ip_ranges_test = ip_ranges.map { |r| NetAddr::CIDR.create r }
+
+hosts.each do |h|
+  if ip_ranges_test.find_index { |t| t.contains? h[1] }.nil?
+    ip_ranges.push h[1]
+  else
+    p "deleted #{h[0]}"
+    hosts.delete h[0]
   end
 end
 
@@ -25,14 +34,6 @@ File.open("#{data_path}/dnsmasq/address.conf", 'w') do |f|
     f.write "address=/#{h[0]}/#{h[1]}\n"
   end
 end
-
-loop do
-  length = ip_ranges.length
-  ip_ranges = NetAddr.merge ip_ranges
-  break if length == ip_ranges.length
-end
-
-ip_ranges.sort!
 
 File.open("#{data_path}/router.rules", 'w') do |f|
   ip_ranges.each do |i|
