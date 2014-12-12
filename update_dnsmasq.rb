@@ -2,7 +2,7 @@ require 'resolv'
 require 'netaddr'
 
 data_path = "#{__dir__}/data"
-domains_file = "#{data_path}/domains.list"
+domains_file = "#{__dir__}/conf/domains.list"
 
 hosts      = {}
 ip_ranges  = Dir.glob("#{data_path}/ip_ranges/*.list").map { |f| File.read(f).split("\n") }.flatten
@@ -11,22 +11,19 @@ dns_server = Resolv::DNS.new nameserver_port: [['208.67.222.222', 443]]
 
 domains.each do |d|
   begin
-    p "resolving #{d}"
+    puts "resolving #{d}"
     hosts[d] = dns_server.getaddress(d).to_s
+    ip_ranges.push "#{hosts[d]}/32"
   rescue => detail
-    p "resolving #{d} fail: #{detail}"
+    puts "resolving #{d} fail: #{detail}"
   end
 end
 
-ip_ranges_test = ip_ranges.map { |r| NetAddr::CIDR.create r }
-
-hosts.each do |h|
-  if ip_ranges_test.find_index { |t| t.contains? h[1] }.nil?
-    ip_ranges.push h[1]
-  else
-    p "deleted #{h[0]}"
-    hosts.delete h[0]
-  end
+loop do
+  length = ip_ranges.length
+  puts "reducing IP ranges length: #{length}"
+  ip_ranges = NetAddr.merge ip_ranges
+  break if ip_ranges.length == length
 end
 
 File.open("#{data_path}/dnsmasq/address.conf", 'w') do |f|
