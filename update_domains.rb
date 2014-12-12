@@ -1,7 +1,7 @@
 sites_file   = "#{__dir__}/conf/sites.list"
 domains_file = "#{__dir__}/data/domains.list"
 
-`scp pi@192.168.88.53:/var/log/dnsmasq.log /tmp/dnsmasq.log`
+system 'scp pi@192.168.88.53:/var/log/dnsmasq.log /tmp/dnsmasq.log'
 
 sites   = File.read(sites_file).split("\n").select { |s| !s.empty? && !s.start_with?('#')}
 domains = File.read(domains_file).split("\n")
