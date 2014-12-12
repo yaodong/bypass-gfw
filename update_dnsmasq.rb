@@ -33,8 +33,8 @@ File.open("#{data_path}/dnsmasq/address.conf", 'w') do |f|
 end
 
 File.open("#{data_path}/router.rules", 'w') do |f|
+  f.write "/ip route remove [/ip route find comment=gfw]\n"
   ip_ranges.each do |i|
-    f.write "/ip route remove [/ip route find dst-address=#{i}]\n"
     f.write "/ip route add dst-address=#{i} gateway=pptp-out1 comment=gfw\n"
   end
 end
