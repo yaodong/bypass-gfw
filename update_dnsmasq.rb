@@ -2,11 +2,11 @@ require 'resolv'
 require 'netaddr'
 
 data_path = "#{__dir__}/data"
-domains_file = "#{__dir__}/conf/domains.list"
+conf_path = "#{__dir__}/conf"
 
 hosts      = {}
 ip_ranges  = Dir.glob("#{data_path}/ip_ranges/*.list").map { |f| File.read(f).split("\n") }.flatten
-domains    = File.read(domains_file).split("\n")
+domains    = File.read("#{conf_path}/domains.list").split("\n")
 dns_server = Resolv::DNS.new nameserver_port: [['208.67.222.222', 443]]
 
 domains.each do |d|
@@ -40,7 +40,7 @@ File.open("#{data_path}/router.rules", 'w') do |f|
 end
 
 File.open("#{data_path}/dnsmasq/forwarded.conf", 'w') do |f|
-  sites = File.read("#{data_path}/sites.list").split("\n").select { |s| !s.empty? && !s.start_with?('#')}
+  sites = File.read("#{conf_path}/sites.list").split("\n").select { |s| !s.empty? && !s.start_with?('#')}
   sites.each do |s|
     f.write "server=/#{s}/208.67.222.222#443\n"
   end
