@@ -50,7 +50,6 @@
 /ip route add dst-address=2.18.240.0/24 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=2.18.244.0/22 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=2.18.248.0/24 gateway=pptp-out1 comment=gfw
-/ip route add dst-address=2.18.250.0/23 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=2.18.252.0/22 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=2.19.80.0/20 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=2.19.112.0/20 gateway=pptp-out1 comment=gfw
@@ -1419,6 +1418,7 @@
 /ip route add dst-address=104.70.124.0/23 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.70.126.0/24 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.70.128.0/19 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=104.70.188.0/22 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.70.230.0/23 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.70.232.0/21 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.70.240.0/20 gateway=pptp-out1 comment=gfw
@@ -1459,6 +1459,13 @@
 /ip route add dst-address=104.76.0.0/17 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.76.128.0/19 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.76.160.0/20 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=104.76.224.0/19 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=104.77.0.0/21 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=104.77.8.0/22 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=104.77.12.0/23 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=104.77.16.0/20 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=104.77.32.0/19 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=104.77.64.0/20 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.132.0.0/16 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.133.0.0/17 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=104.134.128.0/17 gateway=pptp-out1 comment=gfw
@@ -2096,8 +2103,8 @@
 /ip route add dst-address=204.246.174.0/23 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=204.246.176.0/20 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=204.246.230.0/24 gateway=pptp-out1 comment=gfw
-/ip route add dst-address=205.203.132.1/32 gateway=pptp-out1 comment=gfw
-/ip route add dst-address=205.203.140.1/32 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=205.203.132.65/32 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=205.203.140.65/32 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=205.251.192.0/19 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=205.251.192.0/21 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=205.251.224.0/20 gateway=pptp-out1 comment=gfw
@@ -2123,6 +2130,7 @@
 /ip route add dst-address=211.175.153.0/24 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=216.58.192.0/19 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=216.137.32.0/19 gateway=pptp-out1 comment=gfw
+/ip route add dst-address=216.146.46.11/32 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=216.156.213.0/24 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=216.156.242.0/24 gateway=pptp-out1 comment=gfw
 /ip route add dst-address=216.182.224.0/20 gateway=pptp-out1 comment=gfw
