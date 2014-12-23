@@ -7,7 +7,7 @@ ip_ranges  = {}
 # aws
 puts 'collecting aws ip ranges'
 aws_ranges = JSON.parse open('https://ip-ranges.amazonaws.com/ip-ranges.json').read
-ip_ranges['aws'] = aws_ranges['prefixes'].map { |p| p['ip_prefix'] }
+ip_ranges['aws'] = aws_ranges['prefixes'].select{ |p| p['service'] == 'AMAZON' }.map{ |p| p['ip_prefix'] }
 
 # cloudflare cdn
 puts 'collecting cloudflare ip ranges'
