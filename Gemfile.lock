@@ -1,0 +1,10 @@
+GEM
+  remote: https://ruby.taobao.org/
+  specs:
+    netaddr (1.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  netaddr (~> 1.5.0)
