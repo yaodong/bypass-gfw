@@ -1,8 +1,9 @@
-# cdn
+akamai.net
+akamaihd.net
+cloudfront.net
 edgecastcdn.net
 edgesuite.net
-
-# google
+fastly.net
 google.com
 google.com.hk
 google.co.jp
@@ -34,20 +35,14 @@ gmail.com
 googlezip.net
 googledrive.com
 chromium.org
-
-# facebook
 facebook.com
 fbcdn.net
-
-# twitter
 twitter.com
 twimg.com
 t.co
-
 github.com
 gravatar.com
 instagram.com
 wikipedia.org
 dropbox.com
 dropboxusercontent.com
-wsj.com
