@@ -272,6 +272,7 @@
 /ip route add dst-address=23.34.80.0/20 gateway=pptp-out1
 /ip route add dst-address=23.34.96.0/20 gateway=pptp-out1
 /ip route add dst-address=23.34.176.0/20 gateway=pptp-out1
+/ip route add dst-address=23.35.160.0/19 gateway=pptp-out1
 /ip route add dst-address=23.35.192.0/19 gateway=pptp-out1
 /ip route add dst-address=23.35.192.0/20 gateway=pptp-out1
 /ip route add dst-address=23.36.0.0/20 gateway=pptp-out1
@@ -920,6 +921,7 @@
 /ip route add dst-address=54.239.48.0/20 gateway=pptp-out1
 /ip route add dst-address=54.239.96.0/24 gateway=pptp-out1
 /ip route add dst-address=54.239.98.0/23 gateway=pptp-out1
+/ip route add dst-address=54.239.100.0/23 gateway=pptp-out1
 /ip route add dst-address=54.239.104.0/23 gateway=pptp-out1
 /ip route add dst-address=54.239.108.0/22 gateway=pptp-out1
 /ip route add dst-address=54.239.128.0/18 gateway=pptp-out1
@@ -972,7 +974,6 @@
 /ip route add dst-address=64.233.160.0/19 gateway=pptp-out1
 /ip route add dst-address=65.19.187.0/24 gateway=pptp-out1
 /ip route add dst-address=66.102.0.0/20 gateway=pptp-out1
-/ip route add dst-address=66.147.242.89/32 gateway=pptp-out1
 /ip route add dst-address=66.160.145.0/24 gateway=pptp-out1
 /ip route add dst-address=66.171.227.0/24 gateway=pptp-out1
 /ip route add dst-address=66.171.234.0/23 gateway=pptp-out1
@@ -983,6 +984,7 @@
 /ip route add dst-address=67.131.232.0/24 gateway=pptp-out1
 /ip route add dst-address=67.202.0.0/18 gateway=pptp-out1
 /ip route add dst-address=68.232.32.0/20 gateway=pptp-out1
+/ip route add dst-address=68.232.44.121/32 gateway=pptp-out1
 /ip route add dst-address=69.26.179.0/24 gateway=pptp-out1
 /ip route add dst-address=69.26.180.0/24 gateway=pptp-out1
 /ip route add dst-address=69.27.162.0/23 gateway=pptp-out1
@@ -1048,6 +1050,7 @@
 /ip route add dst-address=72.246.76.0/22 gateway=pptp-out1
 /ip route add dst-address=72.246.80.0/23 gateway=pptp-out1
 /ip route add dst-address=72.246.84.0/22 gateway=pptp-out1
+/ip route add dst-address=72.246.88.0/22 gateway=pptp-out1
 /ip route add dst-address=72.246.94.0/23 gateway=pptp-out1
 /ip route add dst-address=72.246.96.0/21 gateway=pptp-out1
 /ip route add dst-address=72.246.97.0/24 gateway=pptp-out1
@@ -1065,7 +1068,7 @@
 /ip route add dst-address=72.246.186.0/23 gateway=pptp-out1
 /ip route add dst-address=72.246.188.0/22 gateway=pptp-out1
 /ip route add dst-address=72.246.196.0/23 gateway=pptp-out1
-/ip route add dst-address=72.246.204.0/22 gateway=pptp-out1
+/ip route add dst-address=72.246.200.0/21 gateway=pptp-out1
 /ip route add dst-address=72.246.216.0/22 gateway=pptp-out1
 /ip route add dst-address=72.246.216.0/24 gateway=pptp-out1
 /ip route add dst-address=72.246.218.0/23 gateway=pptp-out1
@@ -1094,6 +1097,7 @@
 /ip route add dst-address=72.247.126.0/24 gateway=pptp-out1
 /ip route add dst-address=72.247.145.0/24 gateway=pptp-out1
 /ip route add dst-address=72.247.146.0/23 gateway=pptp-out1
+/ip route add dst-address=72.247.152.0/21 gateway=pptp-out1
 /ip route add dst-address=72.247.168.0/21 gateway=pptp-out1
 /ip route add dst-address=72.247.176.0/20 gateway=pptp-out1
 /ip route add dst-address=72.247.192.0/23 gateway=pptp-out1
@@ -1280,6 +1284,7 @@
 /ip route add dst-address=96.16.2.0/23 gateway=pptp-out1
 /ip route add dst-address=96.16.6.0/23 gateway=pptp-out1
 /ip route add dst-address=96.16.8.0/21 gateway=pptp-out1
+/ip route add dst-address=96.16.16.0/20 gateway=pptp-out1
 /ip route add dst-address=96.16.40.0/21 gateway=pptp-out1
 /ip route add dst-address=96.16.48.0/20 gateway=pptp-out1
 /ip route add dst-address=96.16.64.0/20 gateway=pptp-out1
@@ -1373,6 +1378,7 @@
 /ip route add dst-address=104.70.32.0/20 gateway=pptp-out1
 /ip route add dst-address=104.70.116.0/22 gateway=pptp-out1
 /ip route add dst-address=104.70.120.0/23 gateway=pptp-out1
+/ip route add dst-address=104.70.122.0/24 gateway=pptp-out1
 /ip route add dst-address=104.70.124.0/22 gateway=pptp-out1
 /ip route add dst-address=104.70.127.0/24 gateway=pptp-out1
 /ip route add dst-address=104.70.128.0/19 gateway=pptp-out1
@@ -1385,7 +1391,12 @@
 /ip route add dst-address=104.71.32.0/20 gateway=pptp-out1
 /ip route add dst-address=104.71.48.0/23 gateway=pptp-out1
 /ip route add dst-address=104.71.62.0/23 gateway=pptp-out1
-/ip route add dst-address=104.71.128.0/18 gateway=pptp-out1
+/ip route add dst-address=104.71.128.0/22 gateway=pptp-out1
+/ip route add dst-address=104.71.131.0/24 gateway=pptp-out1
+/ip route add dst-address=104.71.132.0/22 gateway=pptp-out1
+/ip route add dst-address=104.71.136.0/21 gateway=pptp-out1
+/ip route add dst-address=104.71.144.0/20 gateway=pptp-out1
+/ip route add dst-address=104.71.160.0/19 gateway=pptp-out1
 /ip route add dst-address=104.71.192.0/20 gateway=pptp-out1
 /ip route add dst-address=104.71.208.0/21 gateway=pptp-out1
 /ip route add dst-address=104.71.216.0/23 gateway=pptp-out1
@@ -1426,9 +1437,17 @@
 /ip route add dst-address=104.77.64.0/20 gateway=pptp-out1
 /ip route add dst-address=104.77.202.0/24 gateway=pptp-out1
 /ip route add dst-address=104.77.204.0/22 gateway=pptp-out1
+/ip route add dst-address=104.77.204.0/23 gateway=pptp-out1
 /ip route add dst-address=104.77.208.0/23 gateway=pptp-out1
 /ip route add dst-address=104.77.216.0/22 gateway=pptp-out1
 /ip route add dst-address=104.78.0.0/19 gateway=pptp-out1
+/ip route add dst-address=104.78.65.0/24 gateway=pptp-out1
+/ip route add dst-address=104.78.66.0/24 gateway=pptp-out1
+/ip route add dst-address=104.78.68.0/22 gateway=pptp-out1
+/ip route add dst-address=104.78.72.0/22 gateway=pptp-out1
+/ip route add dst-address=104.78.76.0/23 gateway=pptp-out1
+/ip route add dst-address=104.78.80.0/20 gateway=pptp-out1
+/ip route add dst-address=104.78.96.0/20 gateway=pptp-out1
 /ip route add dst-address=104.132.0.0/16 gateway=pptp-out1
 /ip route add dst-address=104.133.0.0/17 gateway=pptp-out1
 /ip route add dst-address=104.134.128.0/17 gateway=pptp-out1
@@ -1475,6 +1494,7 @@
 /ip route add dst-address=118.215.128.0/20 gateway=pptp-out1
 /ip route add dst-address=118.215.168.0/21 gateway=pptp-out1
 /ip route add dst-address=118.215.176.0/20 gateway=pptp-out1
+/ip route add dst-address=121.156.59.224/27 gateway=pptp-out1
 /ip route add dst-address=122.248.192.0/18 gateway=pptp-out1
 /ip route add dst-address=122.252.40.0/21 gateway=pptp-out1
 /ip route add dst-address=124.155.192.0/24 gateway=pptp-out1
@@ -1603,6 +1623,7 @@
 /ip route add dst-address=173.223.160.0/21 gateway=pptp-out1
 /ip route add dst-address=173.223.172.0/22 gateway=pptp-out1
 /ip route add dst-address=173.223.176.0/20 gateway=pptp-out1
+/ip route add dst-address=173.223.192.0/22 gateway=pptp-out1
 /ip route add dst-address=173.223.204.0/22 gateway=pptp-out1
 /ip route add dst-address=173.223.204.0/23 gateway=pptp-out1
 /ip route add dst-address=173.223.208.0/20 gateway=pptp-out1
@@ -1850,6 +1871,7 @@
 /ip route add dst-address=184.51.16.0/21 gateway=pptp-out1
 /ip route add dst-address=184.51.28.0/22 gateway=pptp-out1
 /ip route add dst-address=184.51.34.0/23 gateway=pptp-out1
+/ip route add dst-address=184.51.36.0/22 gateway=pptp-out1
 /ip route add dst-address=184.51.56.0/21 gateway=pptp-out1
 /ip route add dst-address=184.51.64.0/22 gateway=pptp-out1
 /ip route add dst-address=184.51.76.0/22 gateway=pptp-out1
@@ -1991,8 +2013,7 @@
 /ip route add dst-address=192.16.0.0/18 gateway=pptp-out1
 /ip route add dst-address=192.16.32.0/21 gateway=pptp-out1
 /ip route add dst-address=192.30.0.0/19 gateway=pptp-out1
-/ip route add dst-address=192.30.252.0/22 gateway=pptp-out1
-/ip route add dst-address=192.30.252.0/23 gateway=pptp-out1
+/ip route add dst-address=192.30.252.143/32 gateway=pptp-out1
 /ip route add dst-address=192.70.222.0/24 gateway=pptp-out1
 /ip route add dst-address=192.133.76.0/22 gateway=pptp-out1
 /ip route add dst-address=192.133.76.0/23 gateway=pptp-out1
@@ -2060,7 +2081,6 @@
 /ip route add dst-address=204.246.174.0/23 gateway=pptp-out1
 /ip route add dst-address=204.246.176.0/20 gateway=pptp-out1
 /ip route add dst-address=204.246.230.0/24 gateway=pptp-out1
-/ip route add dst-address=205.203.132.65/32 gateway=pptp-out1
 /ip route add dst-address=205.251.192.0/19 gateway=pptp-out1
 /ip route add dst-address=205.251.224.0/20 gateway=pptp-out1
 /ip route add dst-address=205.251.240.0/22 gateway=pptp-out1

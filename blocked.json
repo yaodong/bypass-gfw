@@ -1,0 +1,73 @@
+{
+  "networks": {
+    "google":    "AS15169",
+    "twitter":   "AS13414",
+    "facebook":  "AS32934",
+    "fastly":    "AS54113",
+    "akamai":    "AS20940",
+    "edgecast":  "AS15133",
+    "dropbox":   "AS19679",
+    "wikimedia": "AS14907"
+  },
+
+  "ip_ranges": {
+    "cloudflare": "https://www.cloudflare.com/ips-v4",
+    "aws": "https://ip-ranges.amazonaws.com/ip-ranges.json"
+  },
+
+  "domains": [
+    "gist.github.com",
+    "www.gravatar.com"
+  ],
+
+  "resolves": [
+    "akamai.net",
+    "akamaihd.net",
+    "android.com",
+    "appspot.com",
+    "blogger.com",
+    "blogspot.com",
+    "chrome.com",
+    "chromium.org",
+    "cloudfront.net",
+    "dropbox.com",
+    "dropboxusercontent.com",
+    "edgecastcdn.net",
+    "edgesuite.net",
+    "facebook.com",
+    "fastly.net",
+    "fbcdn.net",
+    "feedburner.com",
+    "g.co",
+    "ggpht.com",
+    "github.com",
+    "gmail.com",
+    "golang.org",
+    "goo.gl",
+    "google-analytics.com",
+    "google.co.jp",
+    "google.com",
+    "google.com.hk",
+    "googleadservices.com",
+    "googleapis.com",
+    "googlecode.com",
+    "googledrive.com",
+    "googlehosted.com",
+    "googlelabs.com",
+    "googlemail.com",
+    "googlesource.com",
+    "googlesyndication.com",
+    "googleusercontent.com",
+    "googlevideo.com",
+    "googlezip.net",
+    "gravatar.com",
+    "gstatic.com",
+    "instagram.com",
+    "t.co",
+    "twimg.com",
+    "twitter.com",
+    "wikipedia.org",
+    "youtube.com",
+    "ytimg.com"
+  ]
+}

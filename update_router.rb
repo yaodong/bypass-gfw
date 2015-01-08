@@ -1,12 +1,15 @@
 #! /usr/bin/env ruby
 
 require 'netaddr'
+require 'json'
+
+vpn_gateway = 'pptp-out1'
 
 # -------------------------------------------------------------------
 # Merge IP ranges
 # -------------------------------------------------------------------
-ip_ranges = Dir.glob("#{__dir__}/data/ip_ranges/*.txt").map { |f| File.read(f).split("\n") }.flatten
-ip_ranges.concat File.read("#{__dir__}/data/hosts.txt").split("\n").map { |h| h.split(' ')[0] }
+ip_ranges = Dir.glob("#{__dir__}/data/ip_ranges/*.json").map { |f| JSON.parse File.read(f) }.flatten
+ip_ranges.concat JSON.parse(File.read("#{__dir__}/data/domains.json")).values
 loop do
   length    = ip_ranges.length
   ip_ranges = NetAddr.merge ip_ranges
@@ -16,9 +19,6 @@ end
 # -------------------------------------------------------------------
 # Store IP ranges
 # -------------------------------------------------------------------
-File.open("#{__dir__}/router/router.txt", 'w') do |f|
-  f.write "/ip route remove [/ip route find gateway=pptp-out1 static=no]\n"
-  ip_ranges.each do |i|
-    f.write "/ip route add dst-address=#{i} gateway=pptp-out1\n"
-  end
-end
+rules = ['/ip route remove [/ip route find gateway=pptp-out1 static=no]']
+rules.concat ip_ranges.map{ |i| "/ip route add dst-address=#{i} gateway=#{vpn_gateway}" }
+File.write "#{__dir__}/router/router.txt", rules.join("\n")
