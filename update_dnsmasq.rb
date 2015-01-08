@@ -1,25 +1,21 @@
 #! /usr/bin/env ruby
 
+require 'json'
 require 'resolv'
 require 'netaddr'
+
+conf_dir = "#{__dir__}/dnsmasq"
 
 # -------------------------------------------------------------------
 # Update static address config
 # -------------------------------------------------------------------
-hosts = File.read("#{__dir__}/data/hosts.txt").split("\n")
-File.open("#{__dir__}/dnsmasq/config/addresses.conf", 'w') do |f|
-  hosts.each do |h|
-    i, d = h.split ' '
-    f.puts "address=/#{d}/#{i}"
-  end
-end
+domains   = JSON.parse File.read("#{__dir__}/data/domains.json")
+addresses = domains.to_a.map { |d| "address=/#{d[0]}/#{d[1]}" }
+File.write "#{conf_dir}/addresses.conf", addresses.join("\n")
 
 # -------------------------------------------------------------------
 # Update domain resolv forward
 # -------------------------------------------------------------------
-sites = File.read("#{__dir__}/config/blocked_sites.txt").split("\n").select { |s| !s.empty? && !s.start_with?('#')}
-File.open("#{__dir__}/dnsmasq/config/forwarded.conf", 'w') do |f|
-  sites.each do |s|
-    f.puts "server=/#{s}/208.67.222.222#443"
-  end
-end
+blocked   = JSON.parse File.read("#{__dir__}/blocked.json")
+forwarded = blocked['resolves'].map { |d| "server=/#{d}/208.67.222.222#443" }
+File.write "#{conf_dir}/forwarded.conf", forwarded.join("\n")
