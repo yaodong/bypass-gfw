@@ -311,7 +311,7 @@
 /ip route add dst-address=190.93.240.0/20 gateway=pptp-out1
 /ip route add dst-address=192.16.0.0/18 gateway=pptp-out1
 /ip route add dst-address=192.30.0.0/19 gateway=pptp-out1
-/ip route add dst-address=192.30.252.143/32 gateway=pptp-out1
+/ip route add dst-address=192.30.252.140/32 gateway=pptp-out1
 /ip route add dst-address=192.70.222.0/24 gateway=pptp-out1
 /ip route add dst-address=192.133.76.0/22 gateway=pptp-out1
 /ip route add dst-address=192.158.28.0/22 gateway=pptp-out1

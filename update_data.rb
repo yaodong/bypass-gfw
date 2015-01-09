@@ -1,44 +1,49 @@
 #! /usr/bin/env ruby
 
+require 'cidr-lite'
 require 'json'
-require 'netaddr'
 require 'open-uri'
 require 'resolv'
 
 blocked  = JSON.parse File.read("#{__dir__}/blocked.json")
 data_dir = "#{__dir__}/data"
+ranges   = {}
 
-# -------------------------------------------------------------------
-# Collect IP ranges from AWS and Cloudflare
-# -------------------------------------------------------------------
-blocked_ip_ranges = blocked['ip_ranges']
-
-cloudflare_data   = open(blocked_ip_ranges['cloudflare']).read.split("\n")
-File.write "#{data_dir}/ip_ranges/cloudflare.json", JSON.pretty_generate(cloudflare_data)
-
-aws_data = JSON.parse(open(blocked_ip_ranges['aws']).read)['prefixes'].select{ |p| p['service'] == 'AMAZON' }.map{ |p| p['ip_prefix'] }
-File.write "#{data_dir}/ip_ranges/aws.json", JSON.pretty_generate(aws_data)
-
-# -------------------------------------------------------------------
-# Collect IP ranges by ASN
-# -------------------------------------------------------------------
-blocked['networks'].each do |k, v|
-  ranges = Array(v).map {|n|
-    raw_data = `whois -h whois.radb.net -- '-i origin #{n}' | grep route:`
-    raw_data.split("\n").map { |i| i.split(/\s+/).last }
-  }.flatten
-  loop do
-    length = ranges.count
-    ranges = NetAddr.merge ranges
-    break if ranges.count == length
-  end
-  File.write "#{data_dir}/ip_ranges/#{k}.json", JSON.pretty_generate(ranges)
+def addr_merge(ranges)
+  merger = CIDR::Lite.new
+  ranges.each { |i| merger.add i }
+  merger.list
 end
 
 # -------------------------------------------------------------------
-# Fetch IP of blocked domains
+# Collect IP ranges
+# -------------------------------------------------------------------
+ranges['cloudflare'] = open(blocked['ip_ranges']['cloudflare']).read.split("\n")
+ranges['aws']        = JSON.parse(open(blocked['ip_ranges']['aws']).read)['prefixes'].select{ |p| p['service'] == 'AMAZON' }.map{ |p| p['ip_prefix'] }
+
+blocked['networks'].each do |k, v|
+  ranges[k] = addr_merge Array(v).map {|n|
+    raw_data = `whois -h whois.radb.net -- '-i origin #{n}' | grep route:`
+    raw_data.split("\n").map { |i| i.split(/\s+/).last }
+  }.flatten
+end
+
+# -------------------------------------------------------------------
+# Fetch IPs of blocked domains
 # -------------------------------------------------------------------
 open_dns   = ['208.67.222.222', 443]
 dns_server = Resolv::DNS.new nameserver_port: [open_dns]
 hosts      = Hash[ blocked['domains'].map{ |d| [d, dns_server.getaddress(d).to_s] } ]
-File.write "#{data_dir}/domains.json", JSON.pretty_generate(hosts)
+File.write "#{data_dir}/hosts.json", JSON.pretty_generate(hosts)
+
+# -------------------------------------------------------------------
+# Store IP ranges
+# -------------------------------------------------------------------
+ranges.each do |k, v|
+  # save by name for human
+  File.write "#{data_dir}/ip_ranges/#{k}.json", JSON.pretty_generate(v)
+end
+
+# save combined file for configuration generation
+ranges['hosts'] = hosts.values
+File.write "#{data_dir}/ip_ranges.json", JSON.pretty_generate(addr_merge ranges.values.flatten)

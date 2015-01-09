@@ -66,8 +66,6 @@ GFW BUTTER
 
 数据更新完毕之后，需要执行 `./update_dnsmasq.rb` 和 `./update_router.rb` 来更新配置文件。然后重新导入到 Dnsmasq 和 RouterOS 中。
 
-RouterOS 更新时间约一分钟。
-
 下一步
 ------
 

@@ -2,14 +2,13 @@
 
 require 'json'
 require 'resolv'
-require 'netaddr'
 
 conf_dir = "#{__dir__}/dnsmasq"
 
 # -------------------------------------------------------------------
 # Update static address config
 # -------------------------------------------------------------------
-domains   = JSON.parse File.read("#{__dir__}/data/domains.json")
+domains   = JSON.parse File.read("#{__dir__}/data/hosts.json")
 addresses = domains.to_a.map { |d| "address=/#{d[0]}/#{d[1]}" }
 File.write "#{conf_dir}/addresses.conf", addresses.join("\n")
 

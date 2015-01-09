@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/noahhaon/cidr-lite-ruby.git
+  remote: https://github.com/pragbyte/cidr-lite-ruby.git
   revision: 1e170f4566fdc4e89be790873763c6bc8661641b
   specs:
     cidr-lite (0.0.1)
@@ -7,11 +7,9 @@ GIT
 GEM
   remote: https://ruby.taobao.org/
   specs:
-    netaddr (1.5.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   cidr-lite!
-  netaddr (~> 1.5.0)
