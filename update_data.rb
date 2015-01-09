@@ -22,9 +22,15 @@ File.write "#{data_dir}/ip_ranges/aws.json", JSON.pretty_generate(aws_data)
 # -------------------------------------------------------------------
 # Collect IP ranges by ASN
 # -------------------------------------------------------------------
-blocked['networks'].each do |k, n|
-  raw_data  = `whois -h whois.radb.net -- '-i origin #{n}' | grep route:`
-  ranges    = raw_data.split("\n").map { |i| i.split(/\s+/).last }
+blocked['networks'].each do |k, v|
+  if not v.kind_of?(Array)
+    v = [v]
+  end
+  ranges = []
+  v.each do |n|
+    raw_data  = `whois -h whois.radb.net -- '-i origin #{n}' | grep route:`
+    ranges   += raw_data.split("\n").map { |i| i.split(/\s+/).last }
+  end
   loop do
     length = ranges.count
     ranges = NetAddr.merge ranges
