@@ -19,12 +19,13 @@ end
 # Collect IP ranges
 # -------------------------------------------------------------------
 ranges['cloudflare'] = open(blocked['ip_ranges']['cloudflare']).read.split("\n")
-ranges['aws']        = JSON.parse(open(blocked['ip_ranges']['aws']).read)['prefixes'].select{ |p| p['service'] == 'AMAZON' }.map{ |p| p['ip_prefix'] }
+ranges['aws']        = JSON.parse(open(blocked['ip_ranges']['aws']).read)['prefixes']
+  .select{ |p| p['service'] == 'AMAZON' && !p['region'].start_with?('cn-') }
+  .map{ |p| p['ip_prefix'] }
 
 blocked['networks'].each do |k, v|
   ranges[k] = addr_merge Array(v).map {|n|
-    raw_data = `whois -h whois.radb.net -- '-i origin #{n}' | grep route:`
-    raw_data.split("\n").map { |i| i.split(/\s+/).last }
+    `whois -h whois.radb.net -- '-i origin #{n}'`.split("\n").grep(/^route:/).map { |i| i.split(/\s+/).last }
   }.flatten
 end
 
