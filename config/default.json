@@ -18,7 +18,11 @@
 
   "domains": [
     "gist.github.com",
-    "www.gravatar.com"
+    "www.gravatar.com",
+    "dnscrypt.org",
+    "packagist.org",
+    "www.instapaper.com",
+    "rubygems.org"
   ],
 
   "resolves": [
