@@ -9,30 +9,8 @@ GFW BUTTER
 依赖
 ----
 
-- 一个可靠的 DNS 服务器。我们使用的是运行 Dnsmasq 的 VPS。
+- 一个可靠的 DNS 服务器。我们使用的是运行 Dnsmasq + DNSCrypt-proxy 的 VPS。
 - 一个安装了 RouterOS 系统的路由器。我们使用的是 Mikrotik RB850Gx2 ROS 和 MikroTik RB951G-2HnD。
-
-
-文件结构
---------
-
-- `data/`，抓取的数据，主要是 IP 段。
-- `dnsmasq/`，Dnsmasq 的配置文件。
-- `router/`，RouterOS 的配置文件。
-- `blocked.json`，被封资源列表。
-- `update_data.rb`，抓取最新的数据的脚本。
-- `update_dnsmasq.rb`，更新 Dnsmasq 配置文件的脚本。
-- `update_router.rb`，更新 RouterOS 配置文件的脚本。
-
-被封资源列表
-------------
-
-被封资源列表放在 `blocked.json` 中。
-
-- `networks` 存储的是 ASN 号。
-- `ip_ranges` 存储的是公开的 IP Ranges API。比 ASN 更好，所以 AWS 等是使用的此项而不是 ASN。
-- `domains` 存储的是被封的域名且不包含在以上两项中。
-- `resolves` 存储的是被 DSN 污染的域名。
 
 如何使用
 --------
@@ -54,17 +32,6 @@ GFW BUTTER
 上传 `router/router.txt` 到路由器上。然后在路由器的 terminal 上执行 `import file-name=router.txt`。
 
 执行时间在网络良好的情况下大概需要五分钟。
-
-如何更新
---------
-
-### 更新数据
-
-如果更新了被封资源列表，需要执行 `bundle exec ./update_data.rb` 来重新抓取数据。这个命令也可以用来更新数据，但是根据目前使用情况，后者很少出现。
-
-### 更新配置文件
-
-数据更新完毕之后，需要执行 `./update_dnsmasq.rb` 和 `./update_router.rb` 来更新配置文件。然后重新导入到 Dnsmasq 和 RouterOS 中。
 
 下一步
 ------

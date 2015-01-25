@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/pragbyte/cidr-lite-ruby.git
-  revision: 1e170f4566fdc4e89be790873763c6bc8661641b
-  specs:
-    cidr-lite (0.0.1)
-
 GEM
   remote: https://ruby.taobao.org/
   specs:
@@ -13,5 +7,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cidr-lite!
   rake (~> 10.4.2)
