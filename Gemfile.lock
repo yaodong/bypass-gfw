@@ -7,9 +7,11 @@ GIT
 GEM
   remote: https://ruby.taobao.org/
   specs:
+    rake (10.4.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   cidr-lite!
+  rake (~> 10.4.2)
