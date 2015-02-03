@@ -1,10 +1,10 @@
 
 require_relative 'lib/functions'
 
-task fetch_ip: %w(aws_ip cf_ip asn_ip)
-task default:  %w(fetch_ip dnsmasq router_os)
+task default:  %w(ip_fetch dnsmasq router_os)
+task ip_fetch: %w(ip_aws ip_cf ip_asn ip_combine)
 
-task :aws_ip do
+task :ip_aws do
   data = fetch_json 'https://ip-ranges.amazonaws.com/ip-ranges.json'
   data = data['prefixes'].keep_if do |p|
     p['service'] == 'AMAZON' && !p['region'].start_with?('cn-')
@@ -13,12 +13,12 @@ task :aws_ip do
   save_json 'ip-ranges/aws', data
 end
 
-task :cf_ip do
+task :ip_cf do
   data = open('https://www.cloudflare.com/ips-v4').read.split("\n")
   save_json 'ip-ranges/cloudflare', data
 end
 
-task :asn_ip do
+task :ip_asn do
   config('asn_lists').each do |name, asn_list|
     ranges = Array(asn_list).map do |asn|
       result = `whois -h whois.radb.net -- '-i origin #{asn}'`
@@ -31,15 +31,14 @@ task :asn_ip do
   end
 end
 
+task :ip_combine do
+  ranges = collect_all_ip_ranges
+  save_json 'deploy/ip-ranges/combined', ranges
+end
+
 task :router_os do
   vpn_gateway = 'pptp-out1'
-
-  networks = Dir.glob "#{__dir__}/ip-ranges/*.json"
-  networks.map! { |f| fetch_json f }
-  networks = networks.flatten!
-
-  ip_ranges = networks.concat config('hosts').values
-  ip_ranges = addr_merge ip_ranges
+  ip_ranges   = collect_all_ip_ranges
 
   rules = ['/ip route remove [/ip route find gateway=pptp-out1 comment=gfw-butter]']
   rules.concat ip_ranges.map{ |i| "/ip route add dst-address=#{i} gateway=#{vpn_gateway} comment=gfw-butter" }

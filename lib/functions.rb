@@ -27,6 +27,11 @@ def addr_merge(ranges)
   merger.list
 end
 
-def save_ip_ranges(file, data)
-  File.write "#{__dir__}/../ip-ranges/#{file}.json", JSON.pretty_generate(data)
+def collect_all_ip_ranges
+  ranges = Dir.glob "#{__dir__}/../ip-ranges/*.json"
+  ranges.map! { |f| fetch_json f }
+  ranges.flatten!
+
+  ranges = ranges.concat config('hosts').values
+  addr_merge ranges
 end
