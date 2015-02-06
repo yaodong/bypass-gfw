@@ -221,6 +221,7 @@
 /ip route add dst-address=103.252.112.0/22 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=104.16.0.0/12 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=104.64.0.0/10 gateway=pptp-out1 comment=gfw-butter
+/ip route add dst-address=104.131.25.42/32 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=104.132.0.0/14 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=104.154.0.0/15 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=104.156.80.0/20 gateway=pptp-out1 comment=gfw-butter
