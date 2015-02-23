@@ -3,7 +3,7 @@ require 'open-uri'
 require 'resolv'
 require_relative 'cidr-lite'
 
-DNS_SERVER = Resolv::DNS.new nameserver_port: [['208.67.222.222', 443]]
+DNS_SERVER = Resolv::DNS.new( nameserver_port: [['208.67.222.222', 443]] )
 
 def config(name)
   fetch_json "#{__dir__}/../config/#{name}.json"

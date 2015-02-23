@@ -1,10 +1,12 @@
 
 require_relative 'lib/functions'
 
-task default:  %w(ip_fetch dnsmasq router_os)
-task ip_fetch: %w(ip_aws ip_cf ip_asn ip_combine)
+task default:   %w(fetch_ip make_conf make_conf_router_os)
+task fetch_ip:  %w(fetch_ip_aws fetch_ip_cf fetch_ip_asn combine_ip)
+task make_conf: %w(make_conf_dnsmasq make_conf_router_os)
+task update:    %w(update_dns_server update_router)
 
-task :ip_aws do
+task :fetch_ip_aws do
   data = fetch_json 'https://ip-ranges.amazonaws.com/ip-ranges.json'
   data = data['prefixes'].keep_if do |p|
     p['service'] == 'AMAZON' && !p['region'].start_with?('cn-')
@@ -13,12 +15,12 @@ task :ip_aws do
   save_json 'ip-ranges/aws', data
 end
 
-task :ip_cf do
+task :fetch_ip_cf do
   data = open('https://www.cloudflare.com/ips-v4').read.split("\n")
   save_json 'ip-ranges/cloudflare', data
 end
 
-task :ip_asn do
+task :fetch_ip_asn do
   config('asn_lists').each do |name, asn_list|
     ranges = Array(asn_list).map do |asn|
       result = `whois -h whois.radb.net -- '-i origin #{asn}'`
@@ -31,12 +33,12 @@ task :ip_asn do
   end
 end
 
-task :ip_combine do
+task :combine_ip do
   ranges = collect_all_ip_ranges
   save_json 'deploy/ip-ranges/combined', ranges
 end
 
-task :router_os do
+task :make_conf_router_os do
   vpn_gateway = 'pptp-out1'
   ip_ranges   = collect_all_ip_ranges
 
@@ -46,7 +48,7 @@ task :router_os do
   File.write "#{__dir__}/deploy/router_os/rules.txt", rules.join("\n")
 end
 
-task :dnsmasq do
+task :make_conf_dnsmasq do
   data_dir = "#{__dir__}/deploy/dnsmasq/dnsmasq.d"
 
   addresses = []
@@ -55,7 +57,7 @@ task :dnsmasq do
   end
   File.write "#{data_dir}/addresses.conf", addresses.join("\n")
 
-  forwarded = config('poisoned_domains').map { |d| "server=/#{d}/127.0.0.1#5353" }
+  forwarded = config('dns_forward').map { |d| "server=/#{d}/127.0.0.1#5353" }
   File.write "#{data_dir}/forwarded.conf", forwarded.join("\n")
 end
 
@@ -65,4 +67,5 @@ task :update_hosts do
     dns_resolv k
   end
   save_json 'config/hosts', hosts
+  save_json 'ip-ranges/others', hosts.values
 end
