@@ -15,36 +15,35 @@ GFW BUTTER
 如何使用
 --------
 
-### 1. 创建一个 Dnsmasq 实例
+```
+> ./butter
 
-配置 `/etc/dnsmasq.conf`，让上游 DNS 使用国内 DNS 并且添加一个配置目录。可以参考[我们在用的版本](https://gist.github.com/pragbyte/cf499ad301b78689d256)。
+Usage: butter [-frpv]
 
-然后将 `dnsmasq` 目录下的文件放入 `/etc/dnsmasq.d/` 下（或者你自定义的目录）。
+Update IP Ranges
+    -f, --fetch-ip-all               Fetch all IP ranges
+        --fetch-ip-cf                Fetch IP ranges of CloudFlare
+        --fetch-ip-aws               Update IP ranges of AWS
+        --fetch-ip-asn               Fetch IP ranges by ASNs list
+        --fetch-ip-domains           Fetch IPs by domains
 
-重启 Dnsmasq。
+Make Rules Files
+    -r, --rules-all                  Update all rules files
+        --rules-dns                  Update dns rules files
+        --rules-router               Update router rules files
 
-### 2. 在 RouterOS 上设置 VPN
+Push Rules Files to Devices and Servers
+    -p, --push-all                   Push all rules files
+        --push-router                Push rules to router
+        --push-dns                   Push rules to dns server
 
-我们使用的是 PPTP VPN，所以 Gateway 名字会自动设置为 `pptp-out1`。如果你使用其他类型的 VPN，那么需要再下一步设置时候修改配置文件。
+Misc
+    -v, --version                    Show version
+```
 
-### 3. 导入配置文件到 RouterOS
-
-上传 `router/router.txt` 到路由器上。然后在路由器的 terminal 上执行 `import file-name=router.txt`。
-
-执行时间在网络良好的情况下大概需要五分钟。
-
-下一步
-------
-
-- [ ] Dnsmasq 更新免维护
-- [ ] RouterOS 更新免维护
-
-
-如何参与
+问题反馈
 --------
 
-问题反馈： [Issue](https://github.com/pragbyte/gfw-butter/issues)
+[报告问题](https://github.com/pragbyte/gfw-butter/issues)
 
 欢迎 Fork && Pull Request。
-
-> 柏林墙是被推倒的，而不是翻过去的。希望有一天我们不再只研究如何翻。
