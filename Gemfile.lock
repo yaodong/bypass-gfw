@@ -1,10 +1,12 @@
 GEM
   remote: https://ruby.taobao.org/
   specs:
-    rake (10.4.2)
+    choice (0.2.0)
+    net-ssh (2.9.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  rake (~> 10.4.2)
+  choice (~> 0.2.0)
+  net-ssh (~> 2.9.2)

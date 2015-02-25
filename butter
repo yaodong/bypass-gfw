@@ -1,0 +1,235 @@
+#!/usr/bin/env ruby
+
+PROGRAM_VERSION = 2.0
+ROOT_PATH       = __dir__
+
+require 'choice'
+require_relative 'lib/functions'
+
+Choice.options do
+
+  separator ''
+  separator 'Update IP Ranges'
+
+  option :fetch_ip_all do
+    short '-f'
+    long '--fetch-ip-all'
+    desc 'Fetch all IP ranges'
+  end
+
+  option :fetch_ip_cf do
+    long '--fetch-ip-cf'
+    desc 'Fetch IP ranges of CloudFlare'
+  end
+
+  option :fetch_ip_aws do
+    long '--fetch-ip-aws'
+    desc 'Update IP ranges of AWS'
+  end
+
+  option :fetch_ip_asn do
+    long '--fetch-ip-asn'
+    desc 'Fetch IP ranges by ASNs list'
+  end
+
+  option :fetch_ip_domains do
+    long '--fetch-ip-domains'
+    desc 'Fetch IPs by domains'
+  end
+
+  separator ''
+  separator 'Make Rules Files'
+
+  option :rules_all do
+    short '-r'
+    long '--rules-all'
+    desc 'Update all rules files'
+  end
+
+  option :rules_dns do
+    long '--rules-dns'
+    desc 'Update dns rules files'
+  end
+
+  option :rules_router do
+    long '--rules-router'
+    desc 'Update router rules files'
+  end
+
+  separator ''
+  separator 'Push Rules Files to Devices and Servers'
+
+  option :push_all do
+    short '-p'
+    long '--push-all'
+    desc 'Push all rules files'
+  end
+
+  option :push_router do
+    long '--push-router'
+    desc 'Push rules to router'
+  end
+
+  option :push_dns do
+    long '--push-dns'
+    desc 'Push rules to dns server'
+  end
+
+  separator ''
+  separator 'Misc'
+
+  option :version do
+    short '-v'
+    long '--version'
+    desc 'Show version'
+    action do
+      puts PROGRAM_VERSION
+      exit
+    end
+  end
+end
+
+options = Choice.choices
+
+if options.empty?
+  Choice.help
+  abort
+else
+  options = options.keys
+end
+
+def handle_fetch_ip_all
+  handle_fetch_ip_asn
+  handle_fetch_ip_aws
+  handle_fetch_ip_domains
+  handle_fetch_ip_cf
+end
+
+def handle_fetch_ip_aws
+  data = read_json_url 'https://ip-ranges.amazonaws.com/ip-ranges.json'
+  data = data['prefixes'].keep_if do |p|
+    p['service'] == 'AMAZON' && !p['region'].start_with?('cn-')
+  end
+  data.map! { |p| p['ip_prefix'] }
+  save_ip_ranges 'aws', data
+end
+
+def handle_fetch_ip_cf
+  data = read_url('https://www.cloudflare.com/ips-v4').split("\n")
+  save_ip_ranges 'cloudflare', data
+end
+
+def handle_fetch_ip_domains
+  save_ip_ranges 'domains', CONFIG['domains'].map { |h| get_address h }
+end
+
+def handle_fetch_ip_asn
+  CONFIG['networks'].each do |name, asn_list|
+    ranges = Array(asn_list).map do |asn|
+      result = `whois -h whois.radb.net -- '-i origin #{asn}'`
+      result = result.split("\n").grep(/^route:/)
+      result.map { |i| i.split(/\s+/).last }
+    end
+    ranges.flatten!
+    ranges = addr_merge ranges
+    save_ip_ranges name, ranges
+  end
+end
+
+def after_handle_fetch_ip
+  ranges = Dir.glob "#{ROOT_PATH}/data/ip-ranges/*.json"
+  ranges.map! { |f| read_json_file f }
+  ranges.flatten!
+  ranges = addr_merge ranges
+  save_json 'data/ip-ranges', ranges
+end
+
+def handle_rules_all
+  handle_rules_dns
+  handle_rules_router
+end
+
+def handle_rules_dns
+  data_dir  = "#{ROOT_PATH}/data/dnsmasq/dnsmasq.d"
+  domains   = CONFIG['domains']
+  addresses = read_json_file 'data/ip-ranges/domains'
+
+  File.open "#{data_dir}/addresses.conf", 'w' do |f|
+    domains.zip(addresses).each do |domain, address|
+      f.puts "address=/#{domain}/#{address}"
+    end
+  end
+
+  forwarded = CONFIG['resolving'].map { |domain| "server=/#{domain}/127.0.0.1#5353" }
+  File.write "#{data_dir}/forwarded.conf", forwarded.join("\n")
+end
+
+def handle_rules_router
+  vpn_gateway = 'pptp-out1'
+  ip_ranges   = read_json_file 'data/ip-ranges'
+  rules = ['/ip route remove [/ip route find gateway=pptp-out1 comment=gfw-butter]']
+  rules.concat ip_ranges.map{ |i| "/ip route add dst-address=#{i} gateway=#{vpn_gateway} comment=gfw-butter" }
+  File.write "#{ROOT_PATH}/data/router-rules.txt", rules.join("\n")
+end
+
+def after_handle_rules
+  # pass
+end
+
+def handle_push_all
+  handle_push_router
+  handle_push_dns
+end
+
+def handle_push_router
+  require 'net/ftp'
+  require 'net/ssh'
+
+  unless File.exist? "#{ROOT_PATH}/login.json"
+    abort 'login config file "login.json" is not exists.'
+  end
+
+  login = read_json_file('login')['router']
+
+  file_name = 'gfw-butter-rules.txt'
+  ftp = Net::FTP.new login['address']
+  ftp.login login['user'], login['password']
+
+  begin
+    ftp.delete file_name
+  rescue => _; end
+
+  ftp.put "#{ROOT_PATH}/data/router-rules.txt", file_name
+  ftp.close
+
+  Net::SSH.start(login['address'], login['user'], :password => login['password']) do |ssh|
+    ssh.exec("import file-name=#{file_name}") do |ch, stream, data|
+      puts data.chomp
+    end
+  end
+end
+
+def handle_push_dns
+  # todo
+end
+
+def after_handle_push
+  # pass
+end
+
+%w[fetch_ip rules push].each do |name|
+  name = name.to_s
+  if options.any? {|k| k.start_with? name.to_s }
+    if options.include? "#{name}_all"
+      send "handle_#{name}_all"
+    else
+      options.map do |opt|
+        if opt.start_with? name.to_s
+          method = "handle_#{opt}"
+          send method
+        end
+      end
+    end
+    send "after_handle_#{name}"
+  end
+end
