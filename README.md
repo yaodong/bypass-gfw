@@ -4,13 +4,13 @@ GFW BUTTER
 这是什么
 --------
 
-这是我们正在使用的一个免维护（接近中）的反网络封锁方案。
+这是我们正在使用的一个反网络封锁方案。
 
 依赖
 ----
 
-- 一个可靠的 DNS 服务器。我们使用的是运行 Dnsmasq + DNSCrypt-proxy 的 VPS。
-- 一个安装了 RouterOS 系统的路由器。我们使用的是 Mikrotik RB850Gx2 ROS 和 MikroTik RB951G-2HnD。
+- 一个可靠的 DNS 服务器。我们使用的是运行 Dnsmasq 和 DNSCrypt-proxy。
+- 一个安装了 RouterOS 系统的路由器。我们使用的是 Mikrotik RB850Gx2 ROS / MikroTik RB951G-2HnD。
 
 如何使用
 --------

@@ -8,11 +8,11 @@
     "edgecast":  ["AS15133", "AS14210", "AS14153"],
     "dropbox":   "AS19679",
     "mindspark": "AS14829",
-    "wikimedia": "AS14907"
+    "wikimedia": "AS14907",
+    "github": "AS36459"
   },
 
   "domains": [
-    "gist.github.com",
     "www.gravatar.com",
     "dnscrypt.org",
     "packagist.org",

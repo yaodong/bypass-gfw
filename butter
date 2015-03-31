@@ -138,7 +138,7 @@ end
 
 def after_handle_fetch_ip
   ranges = Dir.glob "#{ROOT_PATH}/data/ip-ranges/*.json"
-  ranges.map! { |f| read_json_file f }
+  ranges.map! { |f| JSON.parse open(f).read }
   ranges.flatten!
   ranges = addr_merge ranges
   save_json 'data/ip-ranges', ranges
