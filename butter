@@ -57,25 +57,6 @@ Choice.options do
   end
 
   separator ''
-  separator 'Push Rules Files to Devices and Servers'
-
-  option :push_all do
-    short '-p'
-    long '--push-all'
-    desc 'Push all rules files'
-  end
-
-  option :push_router do
-    long '--push-router'
-    desc 'Push rules to router'
-  end
-
-  option :push_dns do
-    long '--push-dns'
-    desc 'Push rules to dns server'
-  end
-
-  separator ''
   separator 'Misc'
 
   option :version do
@@ -169,55 +150,14 @@ def handle_rules_router
   ip_ranges   = read_json_file 'data/ip-ranges'
   rules = ['/ip route remove [/ip route find gateway=pptp-out1 comment=gfw-butter]']
   rules.concat ip_ranges.map{ |i| "/ip route add dst-address=#{i} gateway=#{vpn_gateway} comment=gfw-butter" }
-  File.write "#{ROOT_PATH}/data/router-rules.txt", rules.join("\n")
+  File.write "#{ROOT_PATH}/data/router_os/rules.txt", rules.join("\n")
 end
 
 def after_handle_rules
   # pass
 end
 
-def handle_push_all
-  handle_push_router
-  handle_push_dns
-end
-
-def handle_push_router
-  require 'net/ftp'
-  require 'net/ssh'
-
-  unless File.exist? "#{ROOT_PATH}/login.json"
-    abort 'login config file "login.json" is not exists.'
-  end
-
-  login = read_json_file('login')['router']
-
-  file_name = 'gfw-butter-rules.txt'
-  ftp = Net::FTP.new login['address']
-  ftp.login login['user'], login['password']
-
-  begin
-    ftp.delete file_name
-  rescue => _; end
-
-  ftp.put "#{ROOT_PATH}/data/router-rules.txt", file_name
-  ftp.close
-
-  Net::SSH.start(login['address'], login['user'], :password => login['password']) do |ssh|
-    ssh.exec("import file-name=#{file_name}") do |ch, stream, data|
-      puts data.chomp
-    end
-  end
-end
-
-def handle_push_dns
-  # todo
-end
-
-def after_handle_push
-  # pass
-end
-
-%w[fetch_ip rules push].each do |name|
+%w[fetch_ip rules].each do |name|
   name = name.to_s
   if options.any? {|k| k.start_with? name.to_s }
     if options.include? "#{name}_all"
