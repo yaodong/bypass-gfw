@@ -7,49 +7,19 @@ Choice.options do
   separator ''
   separator 'Update IP Ranges'
 
-  option :fetch_ip_all do
-    short '-f'
-    long '--fetch-ip-all'
-    desc 'Fetch all IP ranges'
-  end
-
-  option :fetch_ip_cf do
-    long '--fetch-ip-cf'
-    desc 'Fetch IP ranges of CloudFlare'
-  end
-
-  option :fetch_ip_aws do
-    long '--fetch-ip-aws'
-    desc 'Update IP ranges of AWS'
-  end
-
-  option :fetch_ip_asn do
-    long '--fetch-ip-asn'
-    desc 'Fetch IP ranges by ASNs list'
-  end
-
-  option :fetch_ip_domains do
-    long '--fetch-ip-domains'
-    desc 'Fetch IPs by domains'
+  option :update_ip_ranges do
+    short '-i'
+    long '--ip'
+    desc 'Update IP ranges'
   end
 
   separator ''
   separator 'Make Rules Files'
 
-  option :rules_all do
-    short '-r'
-    long '--rules-all'
-    desc 'Update all rules files'
-  end
-
-  option :rules_dns do
-    long '--rules-dns'
-    desc 'Update dns rules files'
-  end
-
-  option :rules_router do
-    long '--rules-router'
-    desc 'Update router rules files'
+  option :generate_config_files do
+    short '-g'
+    long '--generate'
+    desc 'Generate config files'
   end
 
   separator ''

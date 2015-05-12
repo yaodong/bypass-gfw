@@ -1,27 +1,15 @@
 #!/usr/bin/env ruby
 
-PROGRAM_VERSION = 2.2
+PROGRAM_VERSION = 2.3
 ROOT_PATH       = __dir__
 
 require_relative 'lib/choices'
 require_relative 'lib/handler'
 
-if Choice.choices.empty?
-  Choice.help
-  abort
-end
-
-options = Choice.choices.keys
+choices = Choice.choices
+Choice.help && abort if choices.empty?
 handler = Butter::Handler.new
 
-%w[fetch_ip rules].each do |name|
-  name = name.to_s
-  if options.include? "#{name}_all"
-    handler.send "#{name}_all"
-  else
-    options.map do |opt|
-      handler.send opt if opt.start_with? name
-    end
-  end
-  handler.send "after_#{name}"
+choices.keys.each do |choice|
+  handler.send choice
 end

@@ -11,11 +11,11 @@ module Butter
     CONFIG     = JSON.parse File.read("#{ROOT_PATH}/config.json")
     DNS_SERVER = Resolv::DNS.new( nameserver_port: [['208.67.222.222', 443]] )
 
-    def fetch_ip_all
-      fetch_ip_aws
-      fetch_ip_domains
-      fetch_ip_cf
-      fetch_ip_asn
+    def update_ip_ranges
+      %w[aws cf domains asn].each do |fact|
+        send "fetch_ip_#{fact}"
+      end
+      combine_ip_ranges
     end
 
     def fetch_ip_aws
@@ -33,7 +33,7 @@ module Butter
     end
 
     def fetch_ip_domains
-      save_ip_ranges 'domains', CONFIG['domains'].map { |h| get_address h }
+      save_ip_ranges 'domains', CONFIG['domains'].map { |h| DNS_SERVER.getaddress h }
     end
 
     def fetch_ip_asn
@@ -49,7 +49,7 @@ module Butter
       end
     end
 
-    def after_fetch_ip
+    def combine_ip_ranges
       ranges = Dir.glob "#{ROOT_PATH}/data/ip-ranges/*.json"
       ranges.map! { |f| JSON.parse open(f).read }
       ranges.flatten!
@@ -57,7 +57,7 @@ module Butter
       save_json 'data/ip-ranges', ranges
     end
 
-    def rules_all
+    def generate_config_files
       rules_dns
       rules_router
     end
@@ -85,10 +85,6 @@ module Butter
       File.write "#{ROOT_PATH}/data/router_os/rules.txt", rules.join("\n")
     end
 
-    def after_rules
-      # pass
-    end
-
     private
 
       def read_json_url(uri)
@@ -109,10 +105,6 @@ module Butter
 
       def save_ip_ranges(group, data)
         save_json "data/ip-ranges/#{group}", data
-      end
-
-      def get_address(domain)
-        DNS_SERVER.getaddress domain
       end
 
       def addr_merge(ranges)
