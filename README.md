@@ -15,30 +15,14 @@ GFW BUTTER
 如何使用
 --------
 
+1. 更新 IP 地址
 ```
-> ./butter
+./butter -i
+```
 
-Usage: butter [-frpv]
-
-Update IP Ranges
-    -f, --fetch-ip-all               Fetch all IP ranges
-        --fetch-ip-cf                Fetch IP ranges of CloudFlare
-        --fetch-ip-aws               Update IP ranges of AWS
-        --fetch-ip-asn               Fetch IP ranges by ASNs list
-        --fetch-ip-domains           Fetch IPs by domains
-
-Make Rules Files
-    -r, --rules-all                  Update all rules files
-        --rules-dns                  Update dns rules files
-        --rules-router               Update router rules files
-
-Push Rules Files to Devices and Servers
-    -p, --push-all                   Push all rules files
-        --push-router                Push rules to router
-        --push-dns                   Push rules to dns server
-
-Misc
-    -v, --version                    Show version
+2. 生成配置文件
+```
+./butter -g
 ```
 
 问题反馈
