@@ -23,7 +23,8 @@
     "ocsp.digicert.com",
     "crl3.digicert.com",
     "crl4.digicert.com",
-    "rubydoc.info"
+    "rubydoc.info",
+    "onedrive.live.com"
   ],
 
   "resolving": [
