@@ -8,8 +8,8 @@ require_relative 'lib/handler'
 
 choices = Choice.choices
 Choice.help && abort if choices.empty?
-handler = Butter::Handler.new
 
+handler = Butter::Handler.new
 choices.keys.each do |choice|
   handler.send choice
 end

@@ -9,7 +9,7 @@ module Butter
   class Handler
 
     CONFIG     = JSON.parse File.read("#{ROOT_PATH}/config.json")
-    DNS_SERVER = Resolv::DNS.new( nameserver_port: [['208.67.222.222', 443]] )
+    DNS_SERVER = Resolv::DNS.new({nameserver_port: [['208.67.222.222', 443]]})
 
     def update_ip_ranges
       %w[aws cf domains asn].each do |fact|
