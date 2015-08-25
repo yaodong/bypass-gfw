@@ -63,10 +63,12 @@
 /ip route add dst-address=52.24.0.0/14 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=52.28.0.0/15 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=52.64.0.0/16 gateway=pptp-out1 comment=gfw-butter
-/ip route add dst-address=52.68.0.0/15 gateway=pptp-out1 comment=gfw-butter
+/ip route add dst-address=52.68.0.0/14 gateway=pptp-out1 comment=gfw-butter
+/ip route add dst-address=52.72.0.0/15 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=52.74.0.0/16 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=52.76.0.0/17 gateway=pptp-out1 comment=gfw-butter
-/ip route add dst-address=52.88.0.0/15 gateway=pptp-out1 comment=gfw-butter
+/ip route add dst-address=52.86.0.0/15 gateway=pptp-out1 comment=gfw-butter
+/ip route add dst-address=52.88.0.0/14 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=52.95.34.0/23 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=52.95.36.0/22 gateway=pptp-out1 comment=gfw-butter
 /ip route add dst-address=52.95.48.0/21 gateway=pptp-out1 comment=gfw-butter
